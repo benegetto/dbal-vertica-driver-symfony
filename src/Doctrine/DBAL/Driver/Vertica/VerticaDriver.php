@@ -11,6 +11,7 @@ namespace Doctrine\DBAL\Driver\Vertica;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
+use Doctrine\DBAL\Driver\Vertica\ExceptionConverter;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -234,5 +235,10 @@ class VerticaDriver implements Driver
         }
 
         return $dsn;
+    }
+
+    public function getExceptionConverter(): ExceptionConverter
+    {
+        return new ExceptionConverter();
     }
 }

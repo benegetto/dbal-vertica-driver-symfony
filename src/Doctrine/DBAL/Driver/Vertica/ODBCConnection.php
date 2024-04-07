@@ -85,18 +85,16 @@ class ODBCConnection implements Connection
     /**
      * {@inheritDoc}
      */
-    public function prepare($prepareString)
+    public function prepare(string $sql): \Doctrine\DBAL\Driver\Statement
     {
-        return new ODBCStatement($this->dbh, $prepareString, $this->options);
+        return new ODBCStatement($this->dbh, $sql, $this->options);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function query()
+    public function query(string $sql): \Doctrine\DBAL\Driver\Result
     {
-        $args = func_get_args();
-        $sql = $args[0];
         $stmt = $this->prepare($sql);
         $stmt->execute();
 
@@ -123,9 +121,9 @@ class ODBCConnection implements Connection
      *
      * @return int
      */
-    public function exec($statement)
+    public function exec(string $sql): int
     {
-        $stmt = $this->prepare($statement);
+        $stmt = $this->prepare($sql);
         $stmt->execute();
 
         return $stmt->rowCount();
