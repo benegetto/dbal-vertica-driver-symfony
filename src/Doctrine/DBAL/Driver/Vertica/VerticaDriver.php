@@ -11,6 +11,7 @@ namespace Doctrine\DBAL\Driver\Vertica;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -77,7 +78,7 @@ class VerticaDriver implements Driver
     /**
      * {@inheritDoc}
      */
-    public function getSchemaManager(Connection $conn)
+    public function getSchemaManager(Connection $conn, AbstractPlatform $platform)
     {
         return new VerticaSchemaManager($conn);
     }
